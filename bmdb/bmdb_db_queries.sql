@@ -41,8 +41,9 @@ select * from actor, credit
 		-- values ('Blazzing Saddles', 1987, 'r', 'Mel Brooks');
 
 -- create a user and grant privileges to that user
--- create user bmdb_user@localhost identified by 'sesame';
--- grant select, insert, delete, update on bmdb.* to bmdb_user@localhost;
+drop user if exists bmdb_user@localhost;
+	create user bmdb_user@localhost identified by 'sesame';
+		grant select, insert, delete, update on bmdb.* to bmdb_user@localhost;
 
 -- CREATE USER bmdb_user@localhost IDENTIFIED BY 'sesame';
 -- GRANT SELECT, INSERT, DELETE, UPDATE ON bmdb.* TO bmdb_user@localhost;
@@ -69,7 +70,10 @@ select count(*) from movie
 		-- on e.courseID = c.id;
 select m.title, a.firstName, a.lastName
 	from movie m
-		left join actor a on
-			a.firstName is not null;
-			
+		left join credit c
+			on c.movieID = m.ID
+		left join actor a
+			on c.actorID = a.ID
+				where a.firstName is not null
+		order by title;
 			
