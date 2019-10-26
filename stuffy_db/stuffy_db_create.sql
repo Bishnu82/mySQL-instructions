@@ -23,5 +23,6 @@ Insert into stuffy values
     (10, 'ox', 'brown', 's', 7);
     
 -- create a user and grant privileges to that user
-create user stuffy_db_user@localhost identified by 'sesame';
-grant select, insert, delete, update on bmdb.* to stuffy_db_user@localhost;
+drop user if exists stuffy_user@localhost;
+create user stuffy_user@localhost identified by 'seasame';
+grant select, insert, delete, update on bmdb.* to stuffy_user@localhost;
